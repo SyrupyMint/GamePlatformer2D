@@ -16,34 +16,40 @@ public class PlayerMovement : MonoBehaviour
     private float yInput;
 
     [Header("PlayerStats")]
-    private float walkSpeed = 10f;
-    private float jumpPower = 5f;
+    public float walkSpeed = 10f;
+    public float jumpPower = 5f;
+    public float slideSpeed = 5f;
+    public float wallJumpLerp = 10f;
+    public float dashSpeed = 20f;
+
+    [Header("Coyote-Time")]
+    public float coyoteTime = 0.2f;
+    public float coyoteTimeCounter;
 
     [Header("Boolean")]
     private bool isFacingRight = true;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         xInput = Input.GetAxisRaw("Horizontal");
         yInput = Input.GetAxisRaw("Vertical");
         Vector2 direction = new Vector2(xInput, yInput);
 
-        //if(Input.GetButtonDown("Jump") && col.onGround)
-        //{
-        //    rb.velocity = new Vector2(rb.velocity.x, jumpPower);
-        //}
+        //Jump
+        if (Input.GetButtonDown("Jump") && col.onGround)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+        }
 
-        //if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        //{
-        //    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        //}
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        }
 
         Walk(direction);
         Flip();
@@ -66,4 +72,7 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = localScale;
         }
     }
+
+
+
 }
