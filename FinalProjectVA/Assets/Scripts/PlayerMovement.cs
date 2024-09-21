@@ -18,8 +18,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("PlayerStats")]
     public float walkSpeed = 10f;
     public float jumpPower = 5f;
-    public float slideSpeed = 5f;
-    public float wallJumpLerp = 10f;
+    //public float slideSpeed = 5f;
+    //public float wallJumpLerp = 10f;
     public float dashSpeed = 20f;
 
     [Header("Coyote-Time")]
@@ -28,9 +28,18 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Boolean")]
     private bool isFacingRight = true;
+    public bool Movable;
+    public bool wallGrab;
+    public bool wallJumped;
+    public bool wallSlide;
+    public bool isDashing;
+    private bool groundTouch;
+    private bool hasDashed;
+    //public int side = 1;
 
     void Start()
     {
+        col = GetComponent<Collision>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -49,6 +58,16 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        }
+
+        //CoyoteTime
+        if (col.onGround)
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
         }
 
         Walk(direction);
