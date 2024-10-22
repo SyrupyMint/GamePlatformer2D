@@ -12,27 +12,36 @@ public class PlayerController : MonoBehaviour
     private AnimationScript anim;
 
     [Header("PlayerStats")]
-    public float walkSpeed = 10;
-    public float jumpPower = 50;
-    public float slideSpeed = 5;
-    public float wallJumpLerp = 10;
-    public float dashSpeed = 20;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float jumpPower;
+    [SerializeField] private float slideSpeed;
+    [SerializeField] private float wallJumpLerp;
+    [SerializeField] private float dashSpeed;
 
     [Header("Bools")]
-    public bool _canMove;
-    public bool _wallGrab;
-    public bool _wallJumped;
-    public bool _wallSlide;
-    public bool _isDashing;
+    public bool canMove;
+    public bool wallGrab;
+    public bool wallJumped;
+    public bool wallSlide;
+    public bool isDashing;
 
     [Header("Knockback")]
     public float KBForce;
     public float KBCounter;
     public float KBTotalTime;
-
     public bool KnockFromRight;
+
+    [Header("Coyote Time")]
+    [SerializeField] private float coyoteTime = 0.5f;
+    private float coyoteTimeCounter;
+
+    [Header("Jump Buffering")]
+    [SerializeField] private float jumpBufferTime = 0.2f;
+    private float jumpBufferCounter;
+
     private bool groundTouch;
     private bool hasDashed;
+    private bool isJumping;
 
     public int side = 1;
 
@@ -59,27 +68,27 @@ public class PlayerController : MonoBehaviour
         Walk(dir);
         anim.SetHorizontalMovement(x, y, rb.velocity.y);
 
-        if (col.onWall && wallGrabHold && _canMove)
+        if (col.onWall && wallGrabHold && canMove)
         {
             if (side != col.wallSide)
                 anim.Flip(side * -1);
-            _wallGrab = true;
-            _wallSlide = false;
+            wallGrab = true;
+            wallSlide = false;
         }
 
-        if (wallGrabRel || !col.onWall || !_canMove)
+        if (wallGrabRel || !col.onWall || !canMove)
         {
-            _wallGrab = false;
-            _wallSlide = false;
+            wallGrab = false;
+            wallSlide = false;
         }
 
-        if (col.onGround && !_isDashing)
+        if (col.onGround && !isDashing)
         {
-            _wallJumped = false;
+            wallJumped = false;
             GetComponent<BetterJump>().enabled = true;
         }
 
-        if (_wallGrab && !_isDashing)
+        if (wallGrab && !isDashing)
         {
             rb.gravityScale = 0;
             if (x > .2f || x < -.2f)
@@ -96,24 +105,54 @@ public class PlayerController : MonoBehaviour
 
         if (col.onWall && !col.onGround)
         {
-            if (x != 0 && !_wallGrab)
+            if (x != 0 && !wallGrab)
             {
-                _wallSlide = true;
+                wallSlide = true;
                 WallSlide();
             }
         }
 
         if (!col.onWall || col.onGround)
-            _wallSlide = false;
+            wallSlide = false;
+
+        if (col.onGround)
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        if (jumpInput)
+        {
+            jumpBufferCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
 
         if (jumpInput)
         {
             anim.SetTrigger("jump");
-
-            if (col.onGround)
+            if (coyoteTimeCounter > 0f && jumpBufferCounter > 0f && !isJumping)
+            {
                 Jump(Vector2.up);
-            if (col.onWall && !col.onGround)
+                jumpBufferCounter = 0f;
+                StartCoroutine(JumpCooldown());
+            }
+            else if (col.onWall && !col.onGround)
+            {
                 WallJump();
+            }
+        }
+
+        // Avoid Double Jump made by coyote time
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f); // Reduce jump height
+            coyoteTimeCounter = 0f; //reset coyote time counter
         }
 
 
@@ -152,7 +191,7 @@ public class PlayerController : MonoBehaviour
             KBCounter -= Time.deltaTime;
         }
 
-        if (_wallGrab || _wallSlide || !_canMove)
+        if (wallGrab || wallSlide || !canMove)
             return;
 
         if (x > 0)
@@ -165,13 +204,12 @@ public class PlayerController : MonoBehaviour
             side = -1;
             anim.Flip(side);
         }
-
     }
 
     private void GroundTouch()
     {
         hasDashed = false;
-        _isDashing = false;
+        isDashing = false;
 
         side = anim.sr.flipX ? -1 : 1;
     }
@@ -195,15 +233,15 @@ public class PlayerController : MonoBehaviour
 
         rb.gravityScale = 0;
         GetComponent<BetterJump>().enabled = false;
-        _wallJumped = true;
-        _isDashing = true;
+        wallJumped = true;
+        isDashing = true;
 
         yield return new WaitForSeconds(.3f);
 
         rb.gravityScale = 3;
         GetComponent<BetterJump>().enabled = true;
-        _wallJumped = false;
-        _isDashing = false;
+        wallJumped = false;
+        isDashing = false;
     }
 
     IEnumerator GroundDash()
@@ -217,6 +255,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.velocity += dir * jumpPower;
+
     }
 
     private void WallJump()
@@ -234,7 +273,7 @@ public class PlayerController : MonoBehaviour
 
         Jump((Vector2.up / 1.5f + wallDir / 1.5f));
 
-        _wallJumped = true;
+        wallJumped = true;
     }
 
     private void WallSlide()
@@ -242,7 +281,7 @@ public class PlayerController : MonoBehaviour
         if (col.wallSide != side)
             anim.Flip(side * -1);
 
-        if (!_canMove)
+        if (!canMove)
             return;
 
         bool pushingWall = false;
@@ -252,20 +291,21 @@ public class PlayerController : MonoBehaviour
         }
         float push = pushingWall ? 0 : rb.velocity.x;
 
+
         rb.velocity = new Vector2(push, -slideSpeed);
     }
 
     private void Walk(Vector2 dir)
     {
-        if (!_canMove)
+        if (!canMove)
             return;
 
-        if (_wallGrab)
+        if (wallGrab)
             return;
 
-        if (!_wallJumped)
+        if (!wallJumped)
         {
-            rb.velocity = new Vector2(dir.x * walkSpeed, rb.velocity.y);
+            rb.velocity = (new Vector2(dir.x * walkSpeed, rb.velocity.y));
         }
         else
         {
@@ -275,8 +315,16 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator DisableMovement(float time)
     {
-        _canMove = false;
+        canMove = false;
         yield return new WaitForSeconds(time);
-        _canMove = true;
+        canMove = true;
     }
+
+    private IEnumerator JumpCooldown()
+    {
+        isJumping = true;
+        yield return new WaitForSeconds(0.4f);
+        isJumping = false;
+    }
+    
 }

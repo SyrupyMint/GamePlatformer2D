@@ -16,7 +16,7 @@ public class Firetraps : MonoBehaviour
     private bool isTriggered; //Traps triggered
     private bool isActivated; //Traps activated hurt players
 
-    private PlayerHealth playerHealth;
+    private Health playerHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +37,7 @@ public class Firetraps : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            playerHealth = collision.GetComponent<PlayerHealth>();
+            playerHealth = collision.GetComponent<Health>();
             if (!isTriggered)
             {
                 //Trigger the firetrap
@@ -46,7 +46,7 @@ public class Firetraps : MonoBehaviour
             }
             if (isActivated)
             {
-                collision.GetComponent<PlayerHealth>().TakeDMG(_firetrapDMG);
+                collision.GetComponent<Health>().TakeDMG(_firetrapDMG);
             }
         }
     }

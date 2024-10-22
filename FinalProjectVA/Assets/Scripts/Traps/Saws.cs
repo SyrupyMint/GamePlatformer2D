@@ -41,7 +41,7 @@ public class Saws : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            collision.GetComponent<PlayerHealth>().TakeDMG(dmg);
+            collision.GetComponent<Health>().TakeDMG(dmg);
         }
     }
 }

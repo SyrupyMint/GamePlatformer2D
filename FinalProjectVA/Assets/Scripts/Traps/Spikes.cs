@@ -25,7 +25,14 @@ public class Spikes : MonoBehaviour
             {
                 _cont.KnockFromRight = false;
             }
-            collision.GetComponent<PlayerHealth>().TakeDMG(dmg);
+            collision.GetComponent<Health>().TakeDMG(dmg);
+            // Check if the player's health is zero
+            if (collision.GetComponent<Health>().currentHealth <= 0)
+            {
+                // Respawn the player
+                collision.GetComponent<PlayerRespawn>().Respawn();
+            }
         }
+
     }
 }
