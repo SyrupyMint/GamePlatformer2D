@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Checkpoint
   - Weakpoint
+  - Door
   layers:
   - Default
   - TransparentFX
