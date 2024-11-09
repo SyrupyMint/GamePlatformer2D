@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public Rigidbody2D rb;
     private AnimationScript anim;
-    public CoinManager cm;
 
     [Header("PlayerStats")]
     [SerializeField] private float walkSpeed;
@@ -326,15 +325,6 @@ public class PlayerController : MonoBehaviour
         isJumping = true;
         yield return new WaitForSeconds(0.4f);
         isJumping = false;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Coin"))
-        {
-            Destroy(other.gameObject);
-            cm.coinCount++;
-        }
     }
 
 }
