@@ -35,7 +35,7 @@ public class Firetraps : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             playerHealth = collision.GetComponent<Health>();
             if (!isTriggered)
@@ -48,12 +48,17 @@ public class Firetraps : MonoBehaviour
             {
                 collision.GetComponent<Health>().TakeDMG(_firetrapDMG);
             }
+
+            if (collision.GetComponent<Health>().currentHealth <= 0)
+            {
+                collision.GetComponent<PlayerRespawn>().Respawn();
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             playerHealth = null;
         }

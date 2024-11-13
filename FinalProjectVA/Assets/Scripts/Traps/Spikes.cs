@@ -14,7 +14,7 @@ public class Spikes : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if(collision.CompareTag("Player"))
         {
             _cont.KBCounter = _cont.KBTotalTime;
             if(collision.transform.position.x <= transform.position.x)
@@ -26,6 +26,7 @@ public class Spikes : MonoBehaviour
                 _cont.KnockFromRight = false;
             }
             collision.GetComponent<Health>().TakeDMG(dmg);
+
             // Check if the player's health is zero
             if (collision.GetComponent<Health>().currentHealth <= 0)
             {

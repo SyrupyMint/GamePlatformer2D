@@ -39,9 +39,20 @@ public class Saws : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<Health>().TakeDMG(dmg);
+            Health playerHealth = collision.GetComponent<Health>();
+            PlayerRespawn playerRespawn = collision.GetComponent<PlayerRespawn>();
+
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDMG(dmg);
+
+                if (playerHealth.currentHealth <= 0 && playerRespawn != null)
+                {
+                    playerRespawn.Respawn();
+                }
+            }
         }
     }
 }
