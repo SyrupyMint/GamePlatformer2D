@@ -20,8 +20,6 @@ public class Health : MonoBehaviour
     private Animator _anim;
     public float currentHealth { get; set; }
     private bool _dead;
-    private Collider2D _col;
-    private Rigidbody2D _rb;
     private SpriteRenderer _sr;
 
     private void Awake()
@@ -29,8 +27,6 @@ public class Health : MonoBehaviour
         currentHealth = _startingHealth;
         _sr = GetComponent<SpriteRenderer>();
         _anim = GetComponent<Animator>();
-        _col = GetComponent<Collider2D>();
-        _rb = GetComponent<Rigidbody2D>();
     }
 
     public void TakeDMG(float _dmg)
@@ -91,10 +87,10 @@ public class Health : MonoBehaviour
     {
         invulnerable = true;
 
-        // Ensure Layer 6 and 7 are colliding initially (adjust layer numbers if needed)
-        if (!Physics2D.GetIgnoreLayerCollision(6, 7))
+        // Ensure Layer 6 and 11 are colliding initially (adjust layer numbers if needed)
+        if (!Physics2D.GetIgnoreLayerCollision(6, 11))
         {
-            Physics2D.IgnoreLayerCollision(6, 7, true);
+            Physics2D.IgnoreLayerCollision(6, 11, true);
         }
 
         for (int i = 0; i < _flashNumber; i++)
@@ -106,9 +102,9 @@ public class Health : MonoBehaviour
         }
 
         // Re-enable collision after invulnerability (adjust layer numbers if needed)
-        if (Physics2D.GetIgnoreLayerCollision(6, 7))
+        if (Physics2D.GetIgnoreLayerCollision(6, 11))
         {
-            Physics2D.IgnoreLayerCollision(6, 7, false);
+            Physics2D.IgnoreLayerCollision(6, 11, false);
         }
 
         invulnerable = false;
