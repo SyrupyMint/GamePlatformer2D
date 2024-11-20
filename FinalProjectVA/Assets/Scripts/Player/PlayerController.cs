@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpBufferTime = 0.2f;
     private float jumpBufferCounter;
 
+    [Header("Slippery Settings")]
+    [SerializeField] private float slipperyFactor = 0.1f;
+    private bool isOnIce = false;
+
     private bool groundTouch;
     private bool hasDashed;
     private bool isJumping;
@@ -303,13 +307,20 @@ public class PlayerController : MonoBehaviour
         if (wallGrab)
             return;
 
-        if (!wallJumped)
+        if (isOnIce)
         {
-            rb.velocity = (new Vector2(dir.x * walkSpeed, rb.velocity.y));
+            rb.velocity = Vector2.Lerp(rb.velocity, new Vector2(dir.x * walkSpeed, rb.velocity.y), slipperyFactor * Time.deltaTime);
         }
         else
         {
-            rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(dir.x * walkSpeed, rb.velocity.y)), wallJumpLerp * Time.deltaTime);
+            if (!wallJumped)
+            {
+                rb.velocity = new Vector2(dir.x * walkSpeed, rb.velocity.y);
+            }
+            else
+            {
+                rb.velocity = Vector2.Lerp(rb.velocity, new Vector2(dir.x * walkSpeed, rb.velocity.y), wallJumpLerp * Time.deltaTime);
+            }
         }
     }
 
@@ -327,4 +338,19 @@ public class PlayerController : MonoBehaviour
         isJumping = false;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ice"))
+        {
+            isOnIce = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ice"))
+        {
+            isOnIce = false;
+        }
+    }
 }

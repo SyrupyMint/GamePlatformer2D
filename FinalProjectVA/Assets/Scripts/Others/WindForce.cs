@@ -18,12 +18,12 @@ public class WindForce : MonoBehaviour
     public float windDivider = 500.0f;
 
     [Space]
-    [Header("Wind Direction Timer")]
+    [Header("Wind Direction")]
     public float timerAmount = 5.0f;
     public float startTimer = 0.0f;
     private float lastWindDirection;
 
-    [Header("Wind Direction equals zero Timer")]
+    [Header("No Wind Direction")]
     public float noWindTimerAmount = 2.5f;
     public float noWindStartTimer = 0.0f;
 
@@ -45,7 +45,7 @@ public class WindForce : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isInsideTrigger && !col.onGround)
+        if (isInsideTrigger && !col.onGround && !col.onWall)
         {
             ApplyWind();
         }

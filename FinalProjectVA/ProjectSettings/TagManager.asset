@@ -10,6 +10,7 @@ TagManager:
   - Checkpoint
   - Weakpoint
   - Door
+  - Ice
   layers:
   - Default
   - TransparentFX
