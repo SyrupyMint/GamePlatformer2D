@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,8 +13,8 @@ public class PlayerController : MonoBehaviour
     private AnimationScript anim;
 
     [Header("PlayerStats")]
-    [SerializeField] private float walkSpeed;
-    [SerializeField] private float jumpPower;
+    [SerializeField] public float walkSpeed;
+    [SerializeField] public float jumpPower;
     [SerializeField] private float slideSpeed;
     [SerializeField] private float wallJumpLerp;
     [SerializeField] private float dashSpeed;
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour
     private bool isOnIce = false;
 
     private bool groundTouch;
-    private bool hasDashed;
+    public bool hasDashed;
     private bool isJumping;
 
     public int side = 1;
