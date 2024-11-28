@@ -189,8 +189,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.33882207}
-  m_Size: {x: 0.86, y: 0.8776442}
+  m_Offset: {x: 0, y: -0.33}
+  m_Size: {x: 0.86, y: 0.82}
   m_Direction: 0
 --- !u!114 &2248543053904192905
 MonoBehaviour:
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  walkSpeed: 6
+  walkSpeed: 7
   jumpPower: 12
   slideSpeed: 1
   wallJumpLerp: 5
@@ -221,6 +221,8 @@ MonoBehaviour:
   KnockFromRight: 0
   coyoteTime: 0.25
   jumpBufferTime: 0.2
+  slipperyFactor: 0.1
+  hasDashed: 0
   side: 1
 --- !u!114 &8790057582471604560
 MonoBehaviour:

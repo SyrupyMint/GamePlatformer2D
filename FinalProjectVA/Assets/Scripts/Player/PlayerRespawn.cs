@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class PlayerRespawn : MonoBehaviour
 {
-    [SerializeField] private RespawnOOB initialRespawnPoint;
+    [SerializeField] private RespawnOOB respawn;
     private Transform currentCheckpoint;
     private Health playerHealth;
 
     private void Awake()
     {
+        respawn = GameObject.FindGameObjectWithTag("Respawn").GetComponent<RespawnOOB>();
         playerHealth = GetComponent<Health>();
-        currentCheckpoint = initialRespawnPoint.transform;
+        if (playerHealth == null)
+        {
+            return;
+        }
+        currentCheckpoint = respawn.transform;
     }
 
     public void Respawn()
@@ -23,6 +28,7 @@ public class PlayerRespawn : MonoBehaviour
     {
         if (collision.gameObject.tag == "Checkpoint")
         {
+            respawn.respawnPoint = collision.gameObject;
             currentCheckpoint = collision.transform;
             collision.GetComponent<Collider2D>().enabled = false;
             collision.GetComponent<Animator>().SetTrigger("appear");

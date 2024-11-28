@@ -296,7 +296,6 @@ public class PlayerController : MonoBehaviour
         }
         float push = pushingWall ? 0 : rb.velocity.x;
 
-
         rb.velocity = new Vector2(push, -slideSpeed);
     }
 
