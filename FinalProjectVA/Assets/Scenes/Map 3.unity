@@ -38140,7 +38140,7 @@ MonoBehaviour:
   attackDamage: 1
   enragedAttackDamage: 2
   attackOffset: {x: -1.62, y: -1.95, z: 0}
-  attackRange: 1.8
+  attackRange: 3
   attackMask:
     serializedVersion: 2
     m_Bits: 64
