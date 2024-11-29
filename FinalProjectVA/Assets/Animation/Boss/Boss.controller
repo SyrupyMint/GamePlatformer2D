@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e5e6148e122ce46b6e9f7ad7bc122f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spd: 4
+  spd: 6
   atkRange: 3.5
 --- !u!1101 &1341770678896103876
 AnimatorStateTransition:
