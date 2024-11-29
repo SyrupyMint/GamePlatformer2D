@@ -34,6 +34,7 @@ public class BossHealth : MonoBehaviour
     void Die()
     {
         animator.SetTrigger("die");
+        GetComponent<BoxCollider2D>().enabled = false;
     }
 
     void Deactivate()
