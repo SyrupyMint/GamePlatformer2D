@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     public static SceneController instance;
-    //[SerializeField] private Animator transAnim;
-    
+    [SerializeField] private Animator transAnim;
+
     void Awake()
     {
         if (instance == null)
@@ -23,14 +23,14 @@ public class SceneController : MonoBehaviour
 
     public void NextLevel()
     {
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        StartCoroutine(LoadLevel());
     }
 
-    //IEnumerator LoadLevel()
-    //{
-    //    transAnim.SetTrigger("End");
-    //    yield return new WaitForSeconds(1f);
-    //    SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-    //    transAnim.SetTrigger("Start");
-    //}
+    IEnumerator LoadLevel()
+    {
+        transAnim.SetTrigger("end");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        transAnim.SetTrigger("start");
+    }
 }

@@ -84,6 +84,11 @@ public class BulletBehavior : MonoBehaviour
             {
                 enemyHealth.TakeDMG(dmg);
             }
+            BossHealth bossHp = col.GetComponent<BossHealth>();
+            if (bossHp != null)
+            {
+                bossHp.TakeDamage(dmg);
+            }
             //Destroy the bullet when colliding walls/objects/enemies
             Destroy(gameObject);
         }
