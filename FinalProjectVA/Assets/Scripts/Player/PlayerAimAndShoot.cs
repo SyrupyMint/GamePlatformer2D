@@ -16,11 +16,17 @@ public class PlayerAimAndShoot : MonoBehaviour
     private Vector2 dir;
     private float angle;
 
+    private bool isPaused = false; //track pause state
+
     // Update is called once per frame
     void Update()
     {
-        HandleWeaponRotation();
-        HandleWeaponAttack();
+        //When paused, player cannot aim or shoot
+        if(!isPaused)
+        {
+            HandleWeaponRotation();
+            HandleWeaponAttack();
+        }
     }
 
     private void HandleWeaponAttack()
@@ -51,4 +57,9 @@ public class PlayerAimAndShoot : MonoBehaviour
         weapon.transform.localScale = ls;
     }
 
+    //Update pause game state
+    public void SetPauseState(bool pause)
+    {
+        isPaused = pause;
+    }
 }

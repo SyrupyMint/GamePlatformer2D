@@ -14,10 +14,28 @@ public class SceneController : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Try to find the Animator only in scenes where it should exist
+        if (scene.name != "MainMenu") // Replace "MainMenu" with your actual main menu scene name
+        {
+            GameObject transitionObject = GameObject.Find("Scene Transition");
+            if (transitionObject != null)
+            {
+                transAnim = transitionObject.GetComponent<Animator>();
+            }
+        }
+        else
+        {
+            transAnim = null; // Clear the reference in the Main Menu
         }
     }
 
