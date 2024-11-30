@@ -8,6 +8,9 @@ public class SceneController : MonoBehaviour
     public static SceneController instance;
     [SerializeField] private Animator transAnim;
 
+    [SerializeField] private int mainMenuSceneIndex = 0;
+    [SerializeField] private int lastMapSceneIndex = 3;
+
     void Awake()
     {
         if (instance == null)
@@ -48,7 +51,17 @@ public class SceneController : MonoBehaviour
     {
         transAnim.SetTrigger("end");
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        // Check if the current scene is the last map
+        if (SceneManager.GetActiveScene().buildIndex == lastMapSceneIndex)
+        {
+            // Return to the main menu
+            SceneManager.LoadSceneAsync(mainMenuSceneIndex);
+        }
+        else
+        {
+            // Load the next level
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        }
         transAnim.SetTrigger("start");
     }
 }

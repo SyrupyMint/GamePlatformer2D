@@ -7,6 +7,7 @@ public class WindForce : MonoBehaviour
     [Header("References")]
     [SerializeField] private Collision col;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private LadderMovement lm;
 
     private bool isInsideTrigger = false;
 
@@ -45,7 +46,7 @@ public class WindForce : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isInsideTrigger && !col.onGround && !col.onWall)
+        if (isInsideTrigger && !col.onGround && !col.onWall && !lm.isClimbing)
         {
             ApplyWind();
         }
