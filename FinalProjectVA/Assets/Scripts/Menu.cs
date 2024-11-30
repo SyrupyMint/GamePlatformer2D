@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using TMPro;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -17,6 +19,18 @@ public class Menu : MonoBehaviour
     public GameObject mainMenu;           
     public GameObject settingsMenu;
     public GameObject creditsMenu;
+
+    public TMP_Dropdown resolutionDropdown;
+    private Resolution[] resolutions;
+
+    private void Start()
+    {
+        // Populate the dropdown with available resolutions
+        PopulateResolutionDropdown();
+
+        // Set the OnValueChanged listener for the dropdown
+        resolutionDropdown.onValueChanged.AddListener(ChangeResolution);
+    }
 
     private void Update()
     {
@@ -57,6 +71,34 @@ public class Menu : MonoBehaviour
         GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
         if (selectedObject != null)
         {
+            // Check if the selected object is a TMP_Dropdown
+            if (selectedObject.GetComponent<TMP_Dropdown>() != null)
+            {
+                TMP_Dropdown dropdown = selectedObject.GetComponent<TMP_Dropdown>();
+
+                if (!dropdown.IsExpanded)
+                {
+                    // Open the dropdown if it's not already expanded
+                    dropdown.Show();
+                }
+                else
+                {
+                    // Confirm the current selection and close the dropdown
+                    dropdown.Hide();
+                    ChangeResolution(dropdown.value);
+                }
+                return; // Exit since we handled the dropdown
+            }
+
+            // Check if the selected object is a Toggle
+            if (selectedObject.GetComponent<Toggle>() != null)
+            {
+                // Toggle the current state
+                Toggle toggle = selectedObject.GetComponent<Toggle>();
+                toggle.isOn = !toggle.isOn;
+                return;
+            }
+
             // Call the appropriate method based on the button name
             switch (selectedObject.name)
             {
@@ -133,5 +175,48 @@ public class Menu : MonoBehaviour
             // Quit the application in the build
             Application.Quit();
         #endif
+    }
+
+    public void SetFullscreen(bool isFullscreen)
+    {
+        Screen.fullScreen = isFullscreen;
+    }
+
+    private void PopulateResolutionDropdown()
+    {
+        resolutions = Screen.resolutions; // Get all available resolutions
+        resolutionDropdown.ClearOptions();
+
+        List<string> resolutionOptions = new List<string>();
+        int currentResolutionIndex = 0;
+
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string option = resolutions[i].width + " x " + resolutions[i].height;
+            resolutionOptions.Add(option);
+
+            // Check if this is the current resolution
+            if (resolutions[i].width == Screen.currentResolution.width &&
+                resolutions[i].height == Screen.currentResolution.height)
+            {
+                currentResolutionIndex = i;
+            }
+        }
+
+        resolutionDropdown.AddOptions(resolutionOptions);
+        resolutionDropdown.value = currentResolutionIndex;
+        resolutionDropdown.RefreshShownValue();
+    }
+
+    public void ChangeResolution(int index)
+    {
+        if (resolutions == null || resolutions.Length <= index)
+        {
+            return;
+        }
+
+        // Change the resolution based on the dropdown selection
+        Resolution selectedResolution = resolutions[index];
+        Screen.SetResolution(selectedResolution.width, selectedResolution.height, Screen.fullScreen);
     }
 }

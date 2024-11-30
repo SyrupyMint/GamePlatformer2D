@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2276168964847707593}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Des1
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1908123250960041817}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.09, y: -0.2, z: 0}
+  m_LocalPosition: {x: 1.05, y: 2.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 3569148131283519664}
   - component: {fileID: 7965727022636986037}
   - component: {fileID: 445183592142095951}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: Moving Platfrom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5752339482683597884}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MPlatformParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 792228343540705659}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Des2
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -266,7 +266,7 @@ Transform:
   m_GameObject: {fileID: 7388380037385782073}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.58, y: -3.31, z: 0}
+  m_LocalPosition: {x: 0.91, y: -3.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
