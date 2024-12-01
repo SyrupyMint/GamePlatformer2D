@@ -21,17 +21,22 @@ public class Boss_Walk : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        boss.LookAtPlayer();
-        Vector2 target = new Vector2(player.position.x, rb.position.y);
-        Vector2 newPos = Vector2.MoveTowards(rb.position, target, spd * Time.fixedDeltaTime);
-        rb.MovePosition(newPos);
-
-        if(Vector2.Distance(player.position, rb.position) <= atkRange) 
+        if (boss.isPlayerInRange)
         {
-            //Attack
-            animator.SetTrigger("attack");
+            boss.LookAtPlayer();
+
+            // Move towards the player
+            Vector2 target = new Vector2(player.position.x, rb.position.y);
+            Vector2 newPos = Vector2.MoveTowards(rb.position, target, spd * Time.fixedDeltaTime);
+            rb.MovePosition(newPos);
+
+            // Trigger attack if within range
+            if (Vector2.Distance(player.position, rb.position) <= atkRange)
+            {
+                animator.SetTrigger("attack");
+            }
         }
-        
+
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

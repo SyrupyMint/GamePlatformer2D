@@ -8,6 +8,15 @@ public class Boss : MonoBehaviour
 
     public bool isFlipped = false;
 
+    public bool isPlayerInRange = false;
+
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     public void LookAtPlayer()
     {
         Vector3 flipped = transform.localScale;
@@ -25,5 +34,10 @@ public class Boss : MonoBehaviour
             transform.Rotate(0f, 180f, 0f);
             isFlipped = true;
         }
+    }
+
+    private void Update()
+    {
+        animator.SetBool("isPlayerInRange", isPlayerInRange);
     }
 }
