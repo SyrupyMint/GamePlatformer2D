@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
         if (col.onWall && wallGrabHold && canMove)
         {
-            if (side != col.wallSide)
+            if (col.wallSide != side)
                 anim.Flip(side * -1);
             wallGrab = true;
             wallSlide = false;
@@ -288,11 +288,7 @@ public class PlayerController : MonoBehaviour
         if (!canMove)
             return;
 
-        bool pushingWall = false;
-        if ((rb.velocity.x > 0 && col.onRightWall) || (rb.velocity.x < 0 && col.onLeftWall))
-        {
-            pushingWall = true;
-        }
+        bool pushingWall = (rb.velocity.x > 0 && col.onRightWall) || (rb.velocity.x < 0 && col.onLeftWall);
         float push = pushingWall ? 0 : rb.velocity.x;
 
         rb.velocity = new Vector2(push, -slideSpeed);
