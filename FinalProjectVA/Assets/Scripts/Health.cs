@@ -110,6 +110,7 @@ public class Health : MonoBehaviour
         invulnerable = false;
     }
 
+    //When enemies die
     private void Deactivate()
     {
         gameObject.SetActive(false);

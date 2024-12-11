@@ -70105,6 +70105,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7400348796586048039, guid: 416809815342e3f45bdfce7e709ea239, type: 3}
+      propertyPath: m_OverrideSorting
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400348796586048039, guid: 416809815342e3f45bdfce7e709ea239, type: 3}
+      propertyPath: m_OverridePixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8407699050013459334, guid: 416809815342e3f45bdfce7e709ea239, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -70119,7 +70127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8407699050013459334, guid: 416809815342e3f45bdfce7e709ea239, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 456.4
+      value: 476.8745
       objectReference: {fileID: 0}
     - target: {fileID: 8407699050013459334, guid: 416809815342e3f45bdfce7e709ea239, type: 3}
       propertyPath: m_LocalScale.x
@@ -70155,7 +70163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8407699050013459334, guid: 416809815342e3f45bdfce7e709ea239, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 235.84854
+      value: 235.30975
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

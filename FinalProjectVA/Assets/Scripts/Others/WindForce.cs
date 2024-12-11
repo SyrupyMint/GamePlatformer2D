@@ -100,6 +100,7 @@ public class WindForce : MonoBehaviour
         }
     }
 
+    //Wind affects to particles
     private IEnumerator Lerp(float time, float startDampAmount, float endDampAmount)
     {
         //lerp the pan amount
