@@ -291,6 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42868cebf89004a49af1a1234d8f4426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isClimbing: 0
   rb: {fileID: 3907995013706253497}
 --- !u!114 &1112831607319213433
 MonoBehaviour:
@@ -403,7 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7225a8f9088ccca45bc2ac4bc93255c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialRespawnPoint: {fileID: 0}
+  respawn: {fileID: 0}
 --- !u!114 &2458386420762240250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,7 +445,7 @@ Transform:
   m_GameObject: {fileID: 7058444755551506143}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.13, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -694,7 +694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5853674653179125068, guid: be1b6481a2955ee4494d3ace6f0b4c2a, type: 3}
       propertyPath: m_Name
-      value: WindArea (1)
+      value: WindArea
       objectReference: {fileID: 0}
     - target: {fileID: 6371059177204456278, guid: be1b6481a2955ee4494d3ace6f0b4c2a, type: 3}
       propertyPath: ShapeModule.m_Scale.x
@@ -4720,11 +4720,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6047716175516322520, guid: 1fde6326dcc9f6645aecc1dd8e6cdd87, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 128.01408
+      value: 130.09
       objectReference: {fileID: 0}
     - target: {fileID: 6047716175516322520, guid: 1fde6326dcc9f6645aecc1dd8e6cdd87, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -16.371323
+      value: -15.78
       objectReference: {fileID: 0}
     - target: {fileID: 6047716175516322520, guid: 1fde6326dcc9f6645aecc1dd8e6cdd87, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5813,7 +5813,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8407699050013459334, guid: 416809815342e3f45bdfce7e709ea239, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 475.6001
+      value: 476.3481
       objectReference: {fileID: 0}
     - target: {fileID: 8407699050013459334, guid: 416809815342e3f45bdfce7e709ea239, type: 3}
       propertyPath: m_LocalScale.x
@@ -5849,7 +5849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8407699050013459334, guid: 416809815342e3f45bdfce7e709ea239, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 244.21373
+      value: 243.8397
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

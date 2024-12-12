@@ -116,6 +116,7 @@ public class WindForce : MonoBehaviour
         }
     }
 
+    //Trigger when player is inside the wind area
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

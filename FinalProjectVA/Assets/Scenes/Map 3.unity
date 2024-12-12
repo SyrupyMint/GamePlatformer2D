@@ -16370,6 +16370,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1273168623059094847, guid: 5280476e2634e6140a80bc873e42b8c7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1566900849044688547, guid: 5280476e2634e6140a80bc873e42b8c7, type: 3}
       propertyPath: m_SizeDelta.x
       value: 198.611
@@ -16574,7 +16578,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.21091843, y: 0.24336624}
+  m_Offset: {x: 0.1322403, y: 0.28540194}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -16585,7 +16589,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0973434, y: 3.0442772}
+  m_Size: {x: 0.9399872, y: 3.128351}
   m_EdgeRadius: 0
 --- !u!4 &1561434973
 Transform:

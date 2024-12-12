@@ -35,6 +35,8 @@ public class EnemyProjectile : EnemyDamage
 
     private new void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.name == "WindArea")
+            return;
         hit = true;
         base.OnTriggerEnter2D(collision); //Execute logic from parent script first
         coll.enabled = false;

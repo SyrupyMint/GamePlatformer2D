@@ -18,7 +18,7 @@ public class Menu : MonoBehaviour
 
     public GameObject mainMenu;           
     public GameObject settingsMenu;
-    public GameObject creditsMenu;
+    public GameObject controlsMenu;
 
     public TMP_Dropdown resolutionDropdown;
     private Resolution[] resolutions;
@@ -54,10 +54,10 @@ public class Menu : MonoBehaviour
         {
             CloseSettings();
         }
-        // If in the credits menu, go back to the main menu
-        else if (creditsMenu.activeSelf)
+        // If in the controls menu, go back to the main menu
+        else if (controlsMenu.activeSelf)
         {
-            CloseCredits();
+            CloseControls();
         }
         else
         {
@@ -108,8 +108,8 @@ public class Menu : MonoBehaviour
                 case "SettingsButton":
                     OpenSettings();
                     break;
-                case "CreditsButton":
-                    OpenCredits();
+                case "ControlsButton":
+                    OpenControls();
                     break;
                 case "QuitButton":
                     QuitGame();
@@ -117,8 +117,8 @@ public class Menu : MonoBehaviour
                 case "ReturnButton":
                     if (settingsMenu.activeSelf)
                         CloseSettings();
-                    else if (creditsMenu.activeSelf)
-                        CloseCredits();
+                    else if (controlsMenu.activeSelf)
+                        CloseControls();
                     break;
                 default:
                     break;
@@ -126,17 +126,17 @@ public class Menu : MonoBehaviour
         }
     }
 
-    public void OpenCredits()
+    public void OpenControls()
     {
-        creditsMenu.SetActive(true);
+        controlsMenu.SetActive(true);
         mainMenu.SetActive(false);
 
-        EventSystem.current.SetSelectedGameObject(creditsMenu.transform.Find("ReturnButton").gameObject);
+        EventSystem.current.SetSelectedGameObject(controlsMenu.transform.Find("ReturnButton").gameObject);
     }
 
-    public void CloseCredits()
+    public void CloseControls()
     {
-        creditsMenu.SetActive(false);
+        controlsMenu.SetActive(false);
         mainMenu.SetActive(true);
 
         // Set the PlayButton as the first selected button
